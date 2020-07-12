@@ -1,0 +1,25 @@
+{% extends '_base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+    <div class="container mx-auto max-w-5xl">
+        <p class="text-3xl pb-5 font-semibold">Home page</p>
+        {% if user.is_authenticated %}
+            Hi {{ user.email }}!
+            <a href="{% url 'account_logout' %}"
+               class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                <div class="leading-5 font-medium">Logout</div>
+            </a>
+            {#            <p><a href="{% url 'account_logout' %}">Logout</a></p>#}
+        {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'account_login' %}"
+               class="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline">
+                <div class="leading-5 font-medium">Login</div>
+            </a>
+{#            <p><a href="{% url 'account_login' %}">Login</a></p>#}
+        {% endif %}
+    </div>
+
+{% endblock content %}
