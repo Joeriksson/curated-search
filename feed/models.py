@@ -1,5 +1,6 @@
 import uuid
 
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
@@ -29,6 +30,11 @@ class Feed(TimeStampedModel):
 class Entry(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=500)
+    link = models.URLField(max_length=256)
+    summary = models.TextField()
+    author = models.CharField(max_length=200, null=True)
+    published = models.DateTimeField()
+    tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
     feed = models.ForeignKey(Feed, related_name='entrieds', on_delete=models.CASCADE)
 
     def __str__(self):
