@@ -9,7 +9,7 @@ import uuid
 
 class Migration(migrations.Migration):
 
-    replaces = [('feed', '0001_initial'), ('feed', '0002_auto_20200712_1225')]
+    # replaces = [('feed', '0001_initial'), ('feed', '0002_auto_20200712_1225')]
 
     initial = True
 
