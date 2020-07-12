@@ -5,6 +5,8 @@ services:
     image: postgres:11
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
       - 5432:5432
   redis:
@@ -13,7 +15,7 @@ services:
     env_file:
       - .env
     build: .
-    command: python /code/manage.py runserver 0.0.0.0:8000 --settings=project.settings.development
+    command: python /code/manage.py runserver 0.0.0.0:8000 --settings=core.settings.development
     volumes:
       - .:/code
     ports:
@@ -24,7 +26,7 @@ services:
   celery:
     env_file: .env
     build: .
-    command: celery -A project worker -l info
+    command: celery -A core worker -l info
     volumes:
       - .:/code
     depends_on:
@@ -33,7 +35,7 @@ services:
   celery-beat:
     env_file: .env
     build: .
-    command: celery -A project beat -l info
+    command: celery -A core beat -l info
     volumes:
       - .:/code
     depends_on:

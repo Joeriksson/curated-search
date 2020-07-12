@@ -1,7 +1,7 @@
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-# One os.path.dirname added after moving this file into a sub folder of the project
+# Build paths inside the core like this: os.path.join(BASE_DIR, ...)
+# One os.path.dirname added after moving this file into a sub folder of the core
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'feed.apps.FeedConfig',
 ]
 
 
@@ -45,7 +46,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
@@ -64,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -168,15 +169,15 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 # An example below how to set up a scheduled task
 # The tasks code could live in a tasks.py in the app folder of choice
-# If using tasks in the project folder I explicitly import it
+# If using tasks in the core folder I explicitly import it
 # Couldn't get it to work otherwise
 
 # from celery.schedules import crontab
-# import project.tasks
+# import core.tasks
 #
 # CELERY_BEAT_SCHEDULE = {
 #     'my_scheduled_task': {
-#         'task': 'project.tasks.my_scheduled_task',
+#         'task': 'core.tasks.my_scheduled_task',
 #         'schedule': crontab(minute='*/2'),
 #     },
 # }
