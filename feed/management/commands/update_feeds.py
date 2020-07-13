@@ -26,12 +26,11 @@ class Command(BaseCommand):
 
         for feed in feeds:
             print(feed.feed_url)
-            content = feedparser.parse(feed.feed_url)
 
-            # updated_feed_title = content.feed.title
-            # updated_feed_link = content.feed.link
-            # updated_feed_subtitle = content.feed.subtitle
-            # updated_feed_updated = get_aware_datetime(content.feed.updated)
+            if not feed.active:
+                continue
+
+            content = feedparser.parse(feed.feed_url)
 
             current_feed = Feed.objects.get(feed_url=feed.feed_url)
 

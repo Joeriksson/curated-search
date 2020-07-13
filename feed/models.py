@@ -18,6 +18,7 @@ class Feed(TimeStampedModel):
     sub_title = models.CharField(max_length=300, blank=True)
     site_url = models.URLField(max_length=256, blank=True)
     site_updated = models.DateTimeField(blank=True, null=True)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Title: {self.title} - Url: {self.site_url}'
