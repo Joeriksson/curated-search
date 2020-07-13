@@ -10,7 +10,7 @@ class EntryAdmin(admin.ModelAdmin):
 
 
 class FeedAdmin(admin.ModelAdmin):
-    list_display = ['title', 'site_url', 'added', 'edited']
+    list_display = ['title', 'feed_url', 'site_url', 'added', 'edited']
     list_filter = ['added', 'site_updated', 'added']
     search_fields = ('title',)
 

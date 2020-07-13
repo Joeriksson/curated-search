@@ -1,3 +1,14 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.views.generic import View
+from django.core.management import call_command
+from django.http import HttpResponse
+
+class UpdateView(View):
+
+    def get(self, *args, **kwargs):
+        call_command('update_feeds')
+
+        return HttpResponse('OK')
+
+
