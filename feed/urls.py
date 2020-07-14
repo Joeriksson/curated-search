@@ -1,8 +1,9 @@
 from django.urls import path
 
-from .views import UpdateView
+from .views import UpdateFeedView, UpdateContentView
 
 
 urlpatterns = [
-    path('', UpdateView.as_view(), name='update_feeds'),
+    path('feed/', UpdateFeedView.as_view(), name='update_feeds'),
+    path('content/', UpdateContentView.as_view(), name='update_content'),
 ]
