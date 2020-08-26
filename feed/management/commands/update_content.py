@@ -1,12 +1,11 @@
-from django.core.management import BaseCommand
-
 import requests
 from bs4 import BeautifulSoup
+from django.core.management import BaseCommand
 
 from feed.models import Entry
 
 HEADERS = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'}
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36'}
 
 
 class Command(BaseCommand):
@@ -20,7 +19,6 @@ class Command(BaseCommand):
         entries = Entry.objects.all()
 
         for entry in entries:
-
             if not entry.feed.active:
                 continue
 
