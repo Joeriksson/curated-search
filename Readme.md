@@ -1,6 +1,6 @@
-# Django Template with Celery and Redis
+# Curated Search
 
-A project template to use with Django projects. Includes:
+Built on top of one of my templates. Includes:
 
 - pages app
 - users app
