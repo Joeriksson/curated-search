@@ -47,9 +47,7 @@ class Command(BaseCommand):
                 tags = entry.get('tags', None)
 
                 if tags:
-                    tag_list = []
-                    for tag in tags:
-                        tag_list.append(tag.get('term'))
+                    tag_list = [tag.get('term') for tag in tags]
 
                 obj, created = Entry.objects.update_or_create(
                     link=entry.link,

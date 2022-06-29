@@ -1,4 +1,8 @@
 import requests
+
+from newspaper import Article
+# import nltk
+
 from bs4 import BeautifulSoup
 from django.core.management import BaseCommand
 
@@ -18,22 +22,37 @@ class Command(BaseCommand):
 
         entries = Entry.objects.all()
 
+        # nltk.download('punkt')
+
         for entry in entries:
             if not entry.feed.active:
                 continue
 
-            article_url = entry.link
+            article = Article(entry.link)
+            article.download()
+            article.parse()
 
-            response = requests.get(article_url, headers=HEADERS)
-            html = response.text
-            soup = BeautifulSoup(html, "html.parser")
+            # article.nlp()
 
-            paragraphs = soup.find_all('p')
+            entry.content = article.text
+            if article.meta_description:
+                entry.summary = article.meta_description
+            # if article.tags:
+            #     entry.tags = article.tags
 
-            article_content = ''
-            for paragraph in paragraphs:
-                article_content += paragraph.text
-                # print(p.text)
-
-            entry.content = article_content
             entry.save()
+            # article_url = entry.link
+
+            # response = requests.get(article_url, headers=HEADERS)
+            # html = response.text
+            # soup = BeautifulSoup(html, "html.parser")
+            #
+            # paragraphs = soup.find_all('p')
+
+            # article_content = ''
+            # for paragraph in paragraphs:
+            #     article_content += paragraph.text
+            #     # print(p.text)
+            #
+            # entry.content = article_content
+            # entry.save()

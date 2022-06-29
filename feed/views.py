@@ -4,6 +4,7 @@ from django.views.generic import View
 from django.core.management import call_command
 from django.http import HttpResponse
 
+
 class UpdateFeedView(View):
 
     def get(self, *args, **kwargs):
@@ -18,5 +19,3 @@ class UpdateContentView(View):
         call_command('update_content')
 
         return HttpResponse('OK')
-
-
