@@ -1,5 +1,7 @@
 # Curated Search
 
+![django test workflow](https://github.com/Joeriksson/curated-search/actions/workflows/django.yml/badge.svg)
+
 Built on top of one of my templates. Includes:
 
 - pages app
