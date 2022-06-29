@@ -14,7 +14,7 @@ def test_feed_model():
         title='Test feed',
         sub_title='Test subtitle',
         site_url='https://example.org',
-        site_updated=now
+        site_updated=now,
     )
     feed.save()
 
@@ -36,7 +36,7 @@ def test_entry_model():
         title='Test feed',
         sub_title='Test subtitle',
         site_url='https://example.org',
-        site_updated=now
+        site_updated=now,
     )
     feed.save()
 
