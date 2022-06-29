@@ -42,7 +42,6 @@ class Command(BaseCommand):
             current_feed.save()
 
             for entry in content.entries:
-                # entry.get('tags', None)[0].get('term')
 
                 tags = entry.get('tags', None)
 
@@ -58,7 +57,7 @@ class Command(BaseCommand):
                         'published': get_aware_datetime(entry.published),
                         'tags': tag_list,
                         'feed': current_feed,
-                    }
+                    },
                 )
 
                 obj.save()
