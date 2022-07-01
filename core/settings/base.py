@@ -15,6 +15,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 #ALLOWED_HOSTS = ['127.0.0.1']
 ALLOWED_HOSTS = []
+
+CSRF_TRUSTED_ORIGINS = ['http://*', 'https://*.githubpreview.dev']
+
 # Application definition
 
 INSTALLED_APPS = [
