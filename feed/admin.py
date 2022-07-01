@@ -4,7 +4,7 @@ from .models import Feed, Entry
 
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ['title', 'link', 'published', 'feed', 'added', 'edited']
+    list_display = ['title', 'link', 'summary', 'published', 'feed', 'added', 'edited']
     list_filter = ['published', 'added', 'edited', 'feed__title']
     search_fields = ('title',)
 

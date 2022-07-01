@@ -42,6 +42,12 @@ class Command(BaseCommand):
             current_feed.save()
 
             for entry in content.entries:
+
+                tags = entry.get('tags', None)
+
+                if tags:
+                    tag_list = [tag.get('term') for tag in tags]
+
                 obj, created = Entry.objects.update_or_create(
                     link=entry.link,
                     defaults={
@@ -49,9 +55,9 @@ class Command(BaseCommand):
                         'summary': entry.summary,
                         'author': entry.get('author', None),
                         'published': get_aware_datetime(entry.published),
-                        'tags': entry.get('tags', None),
+                        'tags': tag_list,
                         'feed': current_feed,
-                    }
+                    },
                 )
 
                 obj.save()
