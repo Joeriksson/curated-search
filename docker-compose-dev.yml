@@ -3,6 +3,8 @@ version: '3.7'
 services:
   db:
     image: postgres:11
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
