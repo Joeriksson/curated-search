@@ -78,7 +78,7 @@ joblib==1.1.0
     # via nltk
 kombu==5.2.4
     # via celery
-lxml==4.9.0
+lxml==4.9.1
     # via newspaper3k
 newspaper3k==0.2.8
     # via -r requirements.in
