@@ -27,7 +27,7 @@ dev_web_exec:
 	@docker-compose -f docker-compose-dev.yml exec web $(cmd)
 
 dev_test:
-	@docker-compose -f docker-compose-dev.yml exec web python manage.py test --settings=core.settings.development
+	@docker-compose -f docker-compose-dev.yml exec web python manage.py test --settings=core.settings.settings-test
 
 dev_pytest:
 	@docker-compose -f docker-compose-dev.yml exec web pytest tests/ -v
