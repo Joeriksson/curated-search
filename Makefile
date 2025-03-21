@@ -37,3 +37,7 @@ prod:
 
 prod_down:
 	@docker-compose -f docker-compose-prod.yml down
+
+secret:
+	@python -c 'from django.core.management.utils import get_random_secret_key; \
+            print(get_random_secret_key())'

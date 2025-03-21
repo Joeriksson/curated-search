@@ -15,6 +15,7 @@ class Command(BaseCommand):
 
     help = "Update Article Content into the database"
 
+
     def handle(self, *args, **options):
 
         entries = Entry.objects.all()

@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -5,9 +6,11 @@ from django.urls import path, include
 
 from . import views
 
+
+ADMIN_URL = os.environ.get('ADMIN_URL', 'admin/')
 urlpatterns = [
                   # django admin
-                  path('admin/', admin.site.urls),
+                  path(f'{ADMIN_URL}/', admin.site.urls),
                   path('feeds/', include('feed.urls')),
                   # user management
                   path('accounts/', include('allauth.urls')),

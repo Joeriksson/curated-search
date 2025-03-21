@@ -37,7 +37,8 @@ class Entry(TimeStampedModel):
     author = models.CharField(max_length=200, null=True)
     published = models.DateTimeField()
     tags = ArrayField(models.CharField(max_length=200), blank=True, null=True)
-    feed = models.ForeignKey(Feed, related_name='entrieds', on_delete=models.CASCADE)
+    # TBD Fix misspelling of entries with an empty db
+    feed = models.ForeignKey(Feed, related_name='entries', on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Title: {self.title} - Feed: {self.feed.title}'

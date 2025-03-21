@@ -9,11 +9,12 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 
 # Install dependencies
-#COPY Pipfile Pipfile.lock /code/
-#RUN pip install pipenv && pipenv install --system
-COPY requirements.txt /code/
-RUN python -m pip install --upgrade pip
-RUN python -m pip install -r requirements.txt
+COPY ./pyproject.toml .
+COPY ./uv.lock .
+
+RUN pip install uv
+
+RUN uv pip install -r pyproject.toml --system
 
 # Copy core
 COPY . /code/

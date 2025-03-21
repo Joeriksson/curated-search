@@ -21,43 +21,42 @@ class Command(BaseCommand):
     help = "Update Feeds into the database"
 
     def handle(self, *args, **options):
-        # Implement the logic here
         feeds = Feed.objects.all()
-
         for feed in feeds:
-            print(feed.feed_url)
+            if feed.active:
+                self.update_feed(feed)
 
-            if not feed.active:
-                continue
+    def update_feed(self, feed):
+        """Update a single feed."""
+        content = feedparser.parse(feed.feed_url)
+        self.update_feed_info(feed, content)
+        self.update_feed_entries(feed, content.entries)
 
-            content = feedparser.parse(feed.feed_url)
+    def update_feed_info(self, feed, content):
+        """Update the information of a feed."""
+        feed.title = content.feed.title
+        feed.site_url = content.feed.link
+        feed.sub_title = content.feed.subtitle
+        feed.site_updated = get_aware_datetime(content.feed.updated)
+        feed.save()
 
-            current_feed = Feed.objects.get(feed_url=feed.feed_url)
+    def update_feed_entries(self, feed, entries):
+        """Update the entries of a feed."""
+        for entry in entries:
+            self.update_entry(feed, entry)
 
-            current_feed.title = content.feed.title
-            current_feed.site_url = content.feed.link
-            current_feed.sub_title = content.feed.subtitle
-            current_feed.site_updated = get_aware_datetime(content.feed.updated)
-
-            current_feed.save()
-
-            for entry in content.entries:
-
-                tags = entry.get('tags', None)
-
-                # if tags:
-                tag_list = [tag.get('term') for tag in tags] if tags else []
-
-                obj, created = Entry.objects.update_or_create(
-                    link=entry.link,
-                    defaults={
-                        'title': entry.title,
-                        # 'summary': entry.summary,
-                        'author': entry.get('author', None),
-                        'published': get_aware_datetime(entry.published),
-                        'tags': tag_list,
-                        'feed': current_feed,
-                    },
-                )
-
-                obj.save()
+    def update_entry(self, feed, entry):
+        """Update a single entry of a feed."""
+        tags = entry.get('tags', None)
+        tag_list = [tag.get('term') for tag in tags] if tags else []
+        obj, created = Entry.objects.update_or_create(
+            link=entry.link,
+            defaults={
+                'title': entry.title,
+                'author': entry.get('author', None),
+                'published': get_aware_datetime(entry.published),
+                'tags': tag_list,
+                'feed': feed,
+            },
+        )
+        obj.save()

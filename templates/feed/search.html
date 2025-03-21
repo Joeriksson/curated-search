@@ -1,0 +1,25 @@
+{% extends '_base2.html' %}
+
+{% block content %}
+    {% for entry in entries %}
+        <div class="container">
+            <ul>
+                <li>
+                    <div><h2>{{ entry.title }}</h2></div>
+                    <div>{{ entry.summary }} </div>
+                    <b>Goto <a href="{{ entry.link }}" target="_blank">{{ entry.link }}</a> </b>
+
+                    {% for tag in entry.tags %}
+                        <span>{{ tag }}</span>
+                    {% empty %}
+                        <span>No tags</span>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+    {% empty %}
+        <p>No results found. Try again.</p>
+    {% endfor %}
+{% endblock %}
+
+
