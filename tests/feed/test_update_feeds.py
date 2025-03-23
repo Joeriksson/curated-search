@@ -10,7 +10,7 @@ from feed.models import Feed, Entry
 @pytest.mark.django_db
 def test_handle(mock_update_feed):
     feed1 = Feed.objects.create(feed_url='https://site1/rss/', active=True)
-    feed2 = Feed.objects.create(feed_url='https://site2/rss/', active=False)
+    feed2 = Feed.objects.create(feed_url='https://site2/rss/', active=False) # noqa
     command = Command()
     command.handle()
     mock_update_feed.assert_called_once_with(feed1)
